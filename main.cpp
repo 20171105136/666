@@ -8,7 +8,8 @@ int main(int argc, const char * argv[])
     {
         printf("文件不存在\n");
     }
-    else{
+    else
+    {
         fscanf(a,"%s ,%s",s1,s2);
         printf("%s\n%s\n",s1,s2);
     }
