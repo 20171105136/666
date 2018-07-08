@@ -1,3 +1,11 @@
+//
+//  rita.cpp
+//  666
+//
+//  Created by 李广为 on 2018/7/8.
+//  Copyright © 2018年 guangwei. All rights reserved.
+//
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -10,7 +18,7 @@ int main()
 {
     FILE *a;
     FILE *b;
-    b=fopen("/Users/s20171105136/Desktop/rita666/666/666/4321.csv","a");
+    b=fopen("//Users/s20171105136/Desktop/rita666/666/666/4321.csv","a");
     string s1[200];
     string s2[200];
     string s3[200];
@@ -34,7 +42,7 @@ int main()
     {
         for(int i=0;i<3;i++)
         {
-            fscanf(a,"%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s \n",s1 ,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11);
+            fscanf(a,"%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ，",s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11);
             
             //if(i==1||i==2)
             //{
@@ -45,7 +53,7 @@ int main()
             //else{
             
             fprintf(b,"%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s \n",s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11);
-            //printf("%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s \n",s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11);
+            //printf("%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s \n",s1,s2,s3,s4,s5,s6,s7[2],s8,s9,s10,s11);
             // }
             
         }
