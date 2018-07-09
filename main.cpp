@@ -1,57 +1,108 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <fstream>
-#include <sstream>
-#include<cstdlib>
-#include "algorithm"
-using namespace std;
+#include <cstdlib>
+#include<stdio.h>
+
+struct student
+{
+    
+    int numbers;
+    char name[10];
+    char sex[10];
+    int dateofbirt;
+    char class1[15];
+    char phoneNo[15];
+    int judge1;
+    int judge2;
+    int judge3;
+    int judge4;
+    int judge5;
+    int score;
+};
 int main()
 {
-    FILE *a;
-    FILE *b;
-    b=fopen("/Users/s20171105136/Desktop/rita666/666/666/4321.csv","a");
-    string s1[200];
-    string s2[200];
-    string s3[200];
-    string s4[200];
-    string s5[200];
-    string s6[200];
-    string s7[200];
-    string s8[200];
-    string s9[200];
-    string s10[200];
-    string s11[200];
-    //int s12[200];
+    struct student s[100];
+    FILE *fp1,*fp2;
+    int i=0,j;
     
-    
-    if ((a=fopen("/Users/s20171105136/Desktop/rita666/666/666/1234.csv","r"))==0)
+    fp1 =fopen("student1.csv","r");
+    if(fp1==NULL)
     {
-        printf("nono\n");
+        printf("error");
+        exit(-1);
     }
-    
     else
     {
-        for(int i=0;i<3;i++)
+        fscanf(fp1,"%*[^\n]%*c");
+        while(!feof(fp1))
         {
-            fscanf(a,"%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s \n",s1 ,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11);
-            
-            //if(i==1||i==2)
-            //{
-            
-            //fprintf(b,"%s ,%s ,%s ,%s ,%s ,%s ,%d ,%d ,%d ,%d ,%d \n",s1,s2,s3,s4,s5,s6,s12[1],s12[2],s12[3],s12[4],s12[5]);
-            
-            //}
-            //else{
-            
-            fprintf(b,"%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s \n",s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11);
-            //printf("%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s \n",s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11);
-            // }
-            
+            fscanf(fp1,"%d,%[^,],%[^,],%d,%[^,],%[^,],%d,%d,%d,%d,%d",
+                   &s[i].numbers,&s[i].name,&s[i].sex,&s[i].dateofbirt,&s[i].class1,
+                   &s[i].phoneNo,&s[i].judge1,&s[i].judge2,&s[i].judge3,&s[i].judge4,&s[i].judge5);
+            i++;
+        }
+        j=i;
+        
+        for(i=0;i<j;i++)
+        {
+            printf("%d,%s,%s,%d,%s,%s,%d,%d,%d,%d,%d\n",s[i].numbers,
+                   s[i].name,s[i].sex,s[i].dateofbirt,s[i].class1,s[i].phoneNo,
+                   s[i].judge1,s[i].judge2,s[i].judge3,s[i].judge4,s[i].judge5);
         }
         
-        
+        fclose(fp1);
     }
+    j=i;
+    int max[100],min[100];
     
-    return 0;
+    for(i=0;i<j;i++)
+    {
+        max[i]=min[i]=s[i].judge1;
+    }
+    j=i;
+    
+    for(i=0;i<j;i++)
+    {
+        if(s[i].judge2>max[i])
+            max[i]=s[i].judge2;
+        if(s[i].judge3>max[i])
+            max[i]=s[i].judge3;
+        if(s[i].judge4>max[i])
+            max[i]=s[i].judge4;
+        if(s[i].judge5>max[i])
+            max[i]=s[i].judge5;
+    }
+    j=i;
+    
+    for(i=0;i<j;i++)
+    {
+        if(s[i].judge2<min[i])
+            min[i]=s[i].judge2;
+        if(s[i].judge3<min[i])
+            min[i]=s[i].judge3;
+        if(s[i].judge4<min[i])
+            min[i]=s[i].judge4;
+        if(s[i].judge5<min[i])
+            min[i]=s[i].judge5;
+    }
+    j=i;
+    
+    for(i=0;i<j;i++)
+    {
+        s[i].score=(s[i].judge1+s[i].judge2+s[i].judge3+s[i].judge4+s[i].judge5-max[i]-min[i])/3;
+    }
+    j=i;
+    i=0;
+    
+    fp2=fopen("student2.csv","w");
+    fprintf(fp2,"numbers,name,sex,dateofbirth,class,phoneNo,judge1,judge2,judge3,judge4,judge5,score\n");
+    
+    while(i<j)
+    {
+        fprintf(fp2,"%d,%s,%s,%d,%s,%s,%d,%d,%d,%d,%d,%d\n",
+                s[i].numbers,s[i].name,s[i].sex,s[i].dateofbirt,s[i].class1,
+                s[i].phoneNo,s[i].judge1,s[i].judge2,s[i].judge3,s[i].judge4,s[i].judge5,s[i].score);
+        i++;
+    }
+    fclose(fp2);
+    
+    return 0; 
 }
